@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    {% for item in menu.get_descendants %}
+        <li{% if request.path == item.url %} class="active"{% endif %}>
+            <a href="{{ item.url }}">{{ item.name }}</a>
+            {% if item.children.count %}
+                <ul>
+                    {% for child in item.children.all %}
+                        <li>
+                            <a href="{{ child.url }}">{{ child.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+
+</body>
+</html>
